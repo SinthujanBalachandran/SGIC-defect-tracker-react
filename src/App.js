@@ -1,14 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import './components/headerCss.css'
 import Header from './components/header';
+import Sidebar from './components/Sidebar';
+import Dashboard from './components/Dashboard';
+import AddProject from './components/AddProject';
+import ViewProject from './components/ViewProject';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <Header/>
-    </div>
+    <Router>
+      <div>
+        <Header />
+        
+      </div>
+
+      <div>
+        <Sidebar />
+        <Switch>
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/addProject" component={AddProject}/>
+          <Route path="/viewProject" component={ViewProject}/>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
