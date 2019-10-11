@@ -4,6 +4,8 @@ import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import AddProject from './components/AddProject';
 import ViewProject from './components/ViewProject';
+import EditProject from './components/EditProject'; 
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/addProject" component={AddProject}/>
           <Route path="/viewProject" component={ViewProject}/>
+          <Route path="/editProject/:id" component={EditProject}/>
         </Switch>
       </div>
     </Router>
