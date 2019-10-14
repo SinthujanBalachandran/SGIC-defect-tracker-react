@@ -8,8 +8,12 @@ class ViewProject extends Component {
         projects: []
     }
     handleDelete = id => {
-        axios.delete('http://localhost:8083/test/api/v1/project/' + id);
-        window.location.reload(true);
+        axios.delete('http://localhost:8083/test/api/v1/project/' + id)
+        .then(res=>{
+            if(res.status===200){
+                this.componentDidMount() 
+            }
+        })
     }
 
     getToUpdate = id => {
@@ -37,8 +41,8 @@ class ViewProject extends Component {
                         return (
                             <tr>
                                 
-                                <td>{p.projectName}</td>
-                                <td>{p.projectDescription}</td>
+                                <td>{p.projectname}</td>
+                                <td>{p.projectdesc}</td>
                                 
                                 
                              <a href={`/editProject/${p.id}`} > <td><input type ="button" value="Edit"/></td></a> 

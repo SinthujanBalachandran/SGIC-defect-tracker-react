@@ -1,32 +1,29 @@
 import React, { Component } from 'react';
 import './AddProject.css';
 import axios from 'axios';
+
 class AddProject extends Component {
     state = {
         projectName: '',
         projectDescription: '',
     }
 
-    changeName = event => {
-        this.setState({ projectName: event.target.value });
+    handleChangeValue = event => {
+        this.setState({ [event.target.name]: event.target.value });
+        
     }
 
-    changeDescription = event => {
-        this.setState({ projectDescription: event.target.value });
-    }
+   
 
     handleSubmit = event => {
         event.preventDefault();
-        const save ={
-            projectName: this.state.projectName,
-            projectDescription: this.state.projectDescription 
-        }
+        const save ={projectname: this.state.projectName,projectdesc: this.state.projectDescription }
 
         axios.post('http://localhost:8083/test/api/v1/project',save)
             .then(res => {
                 if (res.status === 200) {
                     alert("Project has been successfully added..!");
-                    window.location.reload();
+                    //window.location.reload();
                     }
                     console.log(res);
             });
@@ -43,19 +40,17 @@ class AddProject extends Component {
     //         .then(res => { })
     // }
     render() {
+        const {projectDescription,projectName} = this.state
         return (
-            
-               
-
             <div className="da">
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Project Name:
-                <input type="text" name="projectName" value={this.state.projectName} placeholder="Project Name" onChange={this.changeName} />
+                <input type="text" name="projectName" value={projectName} placeholder="Project Name" onChange={this.handleChangeValue} />
                     </label>
                     <label>
                         Project Description:
-                <input type="text" name="projectdesc" value={this.state.projectDescription} placeholder="Project Description" onChange={this.changeDescription} />
+                <input type="text" name="projectDescription" value={projectDescription} placeholder="Project Description" onChange={this.handleChangeValue} />
                     </label>
                     <button type="submit">Add</button>
                 </form>
